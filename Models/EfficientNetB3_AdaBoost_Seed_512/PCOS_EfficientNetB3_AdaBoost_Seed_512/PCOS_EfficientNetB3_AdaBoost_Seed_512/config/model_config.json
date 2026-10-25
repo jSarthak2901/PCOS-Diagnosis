@@ -1,0 +1,57 @@
+{
+    "project": "PCOS ultrasound image classification",
+    "architecture": "EfficientNet-B3 + AdaBoost",
+    "seed": 512,
+    "dataset": {
+        "train_directory": "/kaggle/working/PCOSGen-train/train",
+        "test_directory": "/kaggle/working/PCOSGen-train/test",
+        "classes": [
+            "Appears abnormal",
+            "Appears normal"
+        ],
+        "class_to_idx": {
+            "Appears abnormal": 0,
+            "Appears normal": 1
+        },
+        "split_method": "random_split",
+        "validation_fraction": 0.15,
+        "split_indices_file": "splits/split_indices.json",
+        "split_manifest_file": "splits/split_images.csv"
+    },
+    "efficientnet_b3": {
+        "weights_file": "models/efficientnet_b3_best_seed512.pth",
+        "input_size": [
+            224,
+            224
+        ],
+        "optimizer": "Adam",
+        "learning_rate": 0.001,
+        "batch_size": 64,
+        "max_epochs": 50,
+        "early_stopping_patience": 8,
+        "loss": "0.5 * CrossEntropyLoss + 0.5 * DiceLoss",
+        "sampler": "WeightedRandomSampler",
+        "normalization_mean": [
+            0.485,
+            0.456,
+            0.406
+        ],
+        "normalization_std": [
+            0.229,
+            0.224,
+            0.225
+        ],
+        "training_augmentations": [
+            "Resize(224, 224)",
+            "RandomHorizontalFlip",
+            "RandomRotation(20)"
+        ]
+    },
+    "adaboost": {
+        "model_file": "models/adaboost_efficientnet_b3_seed512.joblib",
+        "n_estimators": 100,
+        "learning_rate": 1.0,
+        "random_state": 512,
+        "input_features": "EfficientNet-B3 global-average-pooled features"
+    }
+}
