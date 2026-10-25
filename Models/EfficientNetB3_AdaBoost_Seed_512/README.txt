@@ -18,12 +18,6 @@ splits/split_images.csv
 config/model_config.json
     Model and training configuration.
 
-results/metrics.json
-    Recorded validation and test metrics.
-
-results/training_history.json
-    Training/validation loss and accuracy history.
-
 metadata/environment.json
     Python, library, and hardware information.
 
