@@ -1,0 +1,63 @@
+{
+    "project": "PCOS ultrasound image classification",
+    "architecture": "EfficientNet-B3 feature extractor + AdaBoost",
+    "seed": 512,
+    "dataset_split": {
+        "method": "random_split",
+        "validation_fraction": 0.15,
+        "train_count": 2720,
+        "validation_count": 480,
+        "indices_file": "splits/split_indices.json",
+        "image_manifest": "splits/split_images.csv"
+    },
+    "classes": [
+        "Appears abnormal",
+        "Appears normal"
+    ],
+    "class_to_idx": {
+        "Appears abnormal": 0,
+        "Appears normal": 1
+    },
+    "cnn": {
+        "name": "EfficientNet-B3",
+        "weights_file": "models/efficientnet_b3_final_weights_seed512.pth",
+        "best_checkpoint_file": "models/EfficientNetB3_best_seed512.pkl",
+        "num_classes": 2,
+        "best_validation_accuracy": 0.75625,
+        "input_size": 224,
+        "normalization_mean": [
+            0.485,
+            0.456,
+            0.406
+        ],
+        "normalization_std": [
+            0.229,
+            0.224,
+            0.225
+        ],
+        "optimizer": "Adam",
+        "learning_rate": 0.001,
+        "batch_size": 64,
+        "max_epochs": 50,
+        "early_stopping_patience": 8,
+        "loss": "0.5 * CrossEntropyLoss + 0.5 * DiceLoss",
+        "sampler": "WeightedRandomSampler (inverse class frequency)",
+        "training_augmentations": [
+            "Resize(224, 224)",
+            "RandomHorizontalFlip",
+            "RandomRotation(20)"
+        ],
+        "feature_extraction": "model.features -> global average pooling -> flatten"
+    },
+    "adaboost": {
+        "model_file": "models/adaboost_efficientnet_b3_final_seed512.joblib",
+        "n_estimators": 100,
+        "learning_rate": 1.0,
+        "random_state": 512
+    },
+    "original_kaggle_paths": {
+        "train": "/kaggle/working/PCOSGen-train/train",
+        "test": "/kaggle/working/PCOSGen-train/test"
+    },
+    "note": "Paths refer to the original Kaggle environment. Restore the saved split, preserve ImageFolder class ordering and preprocessing."
+}

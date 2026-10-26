@@ -1,0 +1,14 @@
+{
+    "created_utc": "2026-10-26T19:30:08.223057+00:00",
+    "python_version": "3.12.13",
+    "platform": "Linux-6.18.55+-x86_64-with-glibc2.35",
+    "pytorch_version": "2.10.0+cu128",
+    "torchvision_version": "0.25.0+cu128",
+    "numpy_version": "2.0.2",
+    "scikit_learn_version": "1.6.1",
+    "joblib_version": "1.5.3",
+    "cuda_available": true,
+    "cuda_version": "12.8",
+    "gpu_name": "Tesla T4",
+    "seed": 2622715460
+}
