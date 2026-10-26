@@ -10,7 +10,7 @@ This project uses the PCOSGen ultrasound image datasets available on Zenodo.
 
 Both datasets provide ultrasound images with normal/abnormal classifications. Please download the **updated dataset versions** from the links above.
 
-### Related Resources
+### Related Resources & Work
 
 - **Anagha Kaggle Dataset:** PCOS Detection Using Ultrasound Images
   https://www.kaggle.com/datasets/anaghachoudhari/pcos-detection-using-ultrasound-images
